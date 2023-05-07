@@ -1,4 +1,4 @@
-# Debian Version
+# Debian Version (Ruby)
 
 A port of "Debian Version" comparison function to Ruby. This is based on 
 [Debian Policy Manual v4.6.20, Section 5.6.12](https://www.debian.org/doc/debian-policy/ch-controlfields.html#version).
@@ -7,15 +7,13 @@ It adapts some of the code from https://github.com/FauxFaux/deb-version and http
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+    $ bundle add deb_version
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+    $ gem install deb_version
 
 ## Usage
 
@@ -31,6 +29,10 @@ v1 < v2 # true
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+Run `bundle exec rake rubocop` to check for style violations.
+
+Run `bundle exec rake test` to run tests.
 
 ## Contributing
 
