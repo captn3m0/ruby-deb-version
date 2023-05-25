@@ -3,13 +3,14 @@
 require "minitest/autorun"
 require "deb_version"
 
-class DebianVersionTest < Minitest::Test
+# Tests
+class DebVersionTest < Minitest::Test
   def to_a(version)
     v_(version).to_a
   end
 
   def v_(version)
-    DebVersion::DebianVersion.new(version)
+    DebVersion.new(version)
   end
 
   def test_create_version
@@ -36,6 +37,7 @@ class DebianVersionTest < Minitest::Test
   end
 
   # Ref: https://github.com/xolox/python-deb-pkg-tools/blob/a3d6ef1d82c6342b6a57876fc2360875e033f8f0/deb_pkg_tools/tests.py#L410
+  # rubocop:disable Metrics/AbcSize
   def test_compare_versions
     assert v_("1.0") > v_("0.5")      # usual semantics
     assert v_("1:0.5") > v_("2.0")    # unusual semantics
@@ -64,4 +66,5 @@ class DebianVersionTest < Minitest::Test
     # Test the handling of the '~' token.
     assert v_("1.3~rc2") < v_("1.3")
   end
+  # rubocop:enable Metrics/AbcSize
 end

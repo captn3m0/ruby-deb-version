@@ -19,8 +19,8 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ```ruby
 require 'deb_version'
-v1 = DebVersion::DebianVersion.new("1.3~rc2")
-v2 = DebVersion::DebianVersion.new("1.3")
+v1 = DebVersion.new("1.3~rc2")
+v2 = DebVersion.new("1.3")
 v1 < v2 # true
 ```
 
