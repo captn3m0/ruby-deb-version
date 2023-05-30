@@ -31,6 +31,14 @@ class DebVersion
     [@epoch, @upstream_version, @debian_revision]
   end
 
+  def to_s
+    result = ""
+    result << "#{@epoch}:" if @epoch != 0
+    result << @upstream_version
+    result << "-#{@debian_revision}" unless @debian_revision.empty?
+    result
+  end
+
   # Internal method to get the largest digit prefix
   def get_digit_prefix(characters)
     value = 0
