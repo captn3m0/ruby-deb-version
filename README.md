@@ -1,9 +1,11 @@
-# Debian Version (Ruby) [![License MIT](https://badgen.net/github/license/captn3m0/ruby-deb-version)](https://github.com/captn3m0/ruby-deb-version/blob/main/LICENSE.txt) [![Rubygems version](https://badgen.net/rubygems/v/deb_version)](https://rubygems.org/gems/deb_version) [![CI Status](https://badgen.net/github/checks/captn3m0/ruby-deb-version)](https://github.com/captn3m0/ruby-deb-version/actions/workflows/main.yml?query=branch%3Amain) ![Latest Tag](https://badgen.net/github/tag/captn3m0/ruby-deb-version) [![Open Issues](https://badgen.net/github/open-issues/captn3m0/ruby-deb-version)](https://github.com/captn3m0/ruby-deb-version/issues?q=is%3Aissue+is%3Aopen)
+# Debian Version (Ruby)
+
+[![License MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/captn3m0/ruby-deb-version/blob/main/LICENSE.txt) [![Rubygems version](https://badgen.net/rubygems/v/deb_version)](https://rubygems.org/gems/deb_version) [![CI Status](https://badgen.net/github/checks/captn3m0/ruby-deb-version)](https://github.com/captn3m0/ruby-deb-version/actions/workflows/main.yml?query=branch%3Amain) ![Latest Tag](https://badgen.net/github/tag/captn3m0/ruby-deb-version) [![GitHub issues](https://img.shields.io/github/issues-raw/captn3m0/ruby-deb-version?color=orange&logo=github&logoColor=white)](https://github.com/captn3m0/ruby-deb-version/issues?q=is%3Aissue+is%3Aopen)
 
 A port of "Debian Version" comparison function to Ruby. This is based on 
 [Debian Policy Manual v4.6.20, Section 5.6.12](https://www.debian.org/doc/debian-policy/ch-controlfields.html#version).
 
-It adapts some of the code from https://github.com/FauxFaux/deb-version and https://github.com/xolox/python-deb-pkg-tools
+It adapts some of the code and tests from https://github.com/FauxFaux/deb-version and https://github.com/xolox/python-deb-pkg-tools
 
 ## Installation
 
