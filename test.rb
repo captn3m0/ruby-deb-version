@@ -98,12 +98,12 @@ class DebVersionTest < Minitest::Test
     # We break them down by parts, and validate that the parts are the same
     # If not, we raise an assertion error.
     VERSIONS_FIXTURE.zip(sorted_by_us).each do |apt, us|
-      if apt != us.to_s
-        # We check for part equivalence
-        assert_equal v_(apt), v_(us.to_s)
-        # and sort equivalence
-        assert_equal v_(apt) <=> v_(us.to_s), 0
-      end
+      next unless apt != us.to_s
+
+      # We check for part equivalence
+      assert_equal v_(apt), v_(us.to_s)
+      # and sort equivalence
+      assert_equal v_(apt) <=> v_(us.to_s), 0
     end
   end
 end
