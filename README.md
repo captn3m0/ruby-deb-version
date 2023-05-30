@@ -34,6 +34,8 @@ Run `bundle exec rake rubocop` to check for style violations.
 
 Run `bundle exec rake test` to run tests.
 
+See [HACKING.md](HACKING.md) for further details.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/captn3m0/ruby-deb-version. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/captn3m0/ruby-deb-version/blob/main/CODE_OF_CONDUCT.md).

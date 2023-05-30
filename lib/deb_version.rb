@@ -14,7 +14,7 @@ class DebVersion
 
   # Sorted list of characters used by Debian Version sort.
   # see https://www.debian.org/doc/debian-policy/ch-controlfields.html#version
-  SORT_LIST = ["~", ""] + ("A"..."Z").to_a + ("a"..."z").to_a + PUNCTUATION
+  SORT_LIST = ["~", ""] + ("A".."Z").to_a + ("a".."z").to_a + PUNCTUATION
 
   mapping = {}
   SORT_LIST.each_with_index do |char, index|

@@ -5,6 +5,7 @@ require "deb_version"
 
 # Tests
 class DebVersionTest < Minitest::Test
+  VERSIONS_FIXTURE = File.readlines("all-debian-versions.lst").map(&:strip)
   def to_a(version)
     v_(version).to_a
   end
@@ -25,19 +26,25 @@ class DebVersionTest < Minitest::Test
   end
 
   def test_parse_lots_of_versions
-    File.readlines("all-debian-versions.lst").each do |version|
+    VERSIONS_FIXTURE.each do |version|
       v_(version)
     end
   end
 
+  # rubocop:disable Metrics/AbcSize
   def test_equality
     assert v_("1") == v_("1")
     assert v_("1.0") == v_("1.0")
     assert v_("2:1.0") == v_("2:1.0")
+
+    assert v_("0.01") == v_("0.1")
+    assert_equal v_("0.01") <=> v_("0.1"), 0
+
+    assert v_("0.0.5-1") == v_("0.00.05-1")
+    assert_equal v_("0.0.5-1") <=> v_("0.00.05-1"), 0
   end
 
   # Ref: https://github.com/xolox/python-deb-pkg-tools/blob/a3d6ef1d82c6342b6a57876fc2360875e033f8f0/deb_pkg_tools/tests.py#L410
-  # rubocop:disable Metrics/AbcSize
   def test_compare_versions
     assert v_("1.0") > v_("0.5")      # usual semantics
     assert v_("1:0.5") > v_("2.0")    # unusual semantics
@@ -67,4 +74,36 @@ class DebVersionTest < Minitest::Test
     assert v_("1.3~rc2") < v_("1.3")
   end
   # rubocop:enable Metrics/AbcSize
+
+  # We take a sorted list of version numbers
+  # as per libapt, shuffle it, then sort it as
+  # per our implementation, and validate them as same
+  def test_lst_sort
+    shuffled = VERSIONS_FIXTURE.shuffle
+    sorted_by_us = shuffled.sort_by { |v| v_(v) }
+    # The ordering of equivalent versions is unspecified
+    # in both the implementations, so we
+    # do 2 checks:
+    # 1. Simple version match. This matches 55k/56k of the versions
+    # where the versions are different enough to be sorted correctly.
+    # 2. In case, where the sort order was different, because both
+    # versions are the same such as the following:
+
+    # 0.0.5-1, 0.00.05-1
+    # 0.00.05-1, 0.0.5-1
+    # 0.00001-1, 0.01-1
+    # 0.01-1, 0.00001-1
+    # 0.01-1+b1, 0.1-1+b1
+
+    # We break them down by parts, and validate that the parts are the same
+    # If not, we raise an assertion error.
+    VERSIONS_FIXTURE.zip(sorted_by_us).each do |apt, us|
+      if apt != us.to_s
+        # We check for part equivalence
+        assert_equal v_(apt), v_(us.to_s)
+        # and sort equivalence
+        assert_equal v_(apt) <=> v_(us.to_s), 0
+      end
+    end
+  end
 end
