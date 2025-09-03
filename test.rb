@@ -44,6 +44,7 @@ class DebVersionTest < Minitest::Test
     assert_equal v_("0.0.5-1") <=> v_("0.00.05-1"), 0
   end
 
+  # rubocop:disable Metrics/MethodLength
   # Ref: https://github.com/xolox/python-deb-pkg-tools/blob/a3d6ef1d82c6342b6a57876fc2360875e033f8f0/deb_pkg_tools/tests.py#L410
   def test_compare_versions
     assert v_("1.0") > v_("0.5")      # usual semantics
@@ -102,6 +103,7 @@ class DebVersionTest < Minitest::Test
     assert v_("1") < v_("1ubuntu1")
     assert v_("7.4.027") < v_("7.4.052")
   end
+  # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 
   # We take a sorted list of version numbers
