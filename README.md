@@ -5,7 +5,15 @@
 A port of "Debian Version" comparison function to Ruby. This is based on 
 [Debian Policy Manual v4.6.20, Section 5.6.12](https://www.debian.org/doc/debian-policy/ch-controlfields.html#version).
 
-It adapts some of the code and tests from https://github.com/FauxFaux/deb-version and https://github.com/xolox/python-deb-pkg-tools
+It adapts some of the code and tests from various other ports:
+
+- https://github.com/FauxFaux/deb-version
+- https://github.com/xolox/python-deb-pkg-tools
+- https://github.com/knqyf263/go-deb-version/
+
+*Note*: This package is _considered done_, but still maintained. There are no
+dependencies, so new releases only include new ruby versions, and possibly
+drop older ones, or in the unlikely event of Debian Policy Manual changing.
 
 ## Installation
 
