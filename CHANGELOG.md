@@ -1,4 +1,5 @@
 ## [Unreleased]
+- Ports a few more tests from [go-deb-version](https://github.com/knqyf263/go-deb-version/blob/master/version_test.go)
 
 ## [1.0.3] - 2025-08-25
 - Drops Ruby 3.0

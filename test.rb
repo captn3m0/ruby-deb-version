@@ -72,6 +72,35 @@ class DebVersionTest < Minitest::Test
     refute v_("0.5") != v_("0:0.5") # unusual semantics
     # Test the handling of the '~' token.
     assert v_("1.3~rc2") < v_("1.3")
+
+    # The following tests come via go-deb-version
+
+    # RedHat
+    assert v_("7.4.629-3") < v_("7.4.629-5")
+    assert v_("7.4.622-1") < v_("7.4.629-1")
+    assert v_("6.0-4.el6.x86_64") < v_("6.0-5.el6.x86_64")
+    assert v_("6.0-4.el6.x86_64") < v_("6.1-3.el6.x86_64")
+    refute v_("7.0-4.el6.x86_64") < v_("6.1-3.el6.x86_64")
+
+    # Debian
+    assert v_("2:7.4.052-1ubuntu3") < v_("2:7.4.052-1ubuntu3.1")
+    assert v_("2:7.4.052-1ubuntu2") < v_("2:7.4.052-1ubuntu3")
+    assert v_("2:7.4.052-1") < v_("2:7.4.052-1ubuntu3")
+    assert v_("2:7.4.052") < v_("2:7.4.052-1")
+    assert v_("1:7.4.052") < v_("2:7.4.052")
+    refute v_("1:7.4.052") < v_("7.4.052")
+    refute v_("2:7.4.052-1ubuntu3.2") < v_("2:7.4.052-1ubuntu3.1")
+    refute v_("2:7.4.052-1ubuntu3.1") < v_("2:7.4.052-1ubuntu3")
+    refute v_("2:7.4.052-1ubuntu3") < v_("2:7.4.052-1ubuntu2")
+    refute v_("2:7.4.052-1ubuntu1") < v_("2:7.4.052-1")
+    assert v_("2:6.0-9ubuntu1.4") < v_("2:6.0-9ubuntu1.5")
+    refute v_("2:7.4.052-1ubuntu") < v_("2:7.4.052-1")
+    assert v_("6.4.052") < v_("7.4.052")
+    assert v_("6.4.052") < v_("6.5.052")
+    assert v_("6.4.052") < v_("6.4.053")
+    assert v_("1ubuntu1") < v_("1ubuntu3.1")
+    assert v_("1") < v_("1ubuntu1")
+    assert v_("7.4.027") < v_("7.4.052")
   end
   # rubocop:enable Metrics/AbcSize
 
