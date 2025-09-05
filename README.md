@@ -1,6 +1,6 @@
 # Debian Version (Ruby)
 
-[![License MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/captn3m0/ruby-deb-version/blob/main/LICENSE.txt) [![Rubygems version](https://badgen.net/rubygems/v/deb_version)](https://rubygems.org/gems/deb_version) [![CI Status](https://badgen.net/github/checks/captn3m0/ruby-deb-version)](https://github.com/captn3m0/ruby-deb-version/actions/workflows/main.yml?query=branch%3Amain) ![Latest Tag](https://badgen.net/github/tag/captn3m0/ruby-deb-version) [![GitHub issues](https://img.shields.io/github/issues-raw/captn3m0/ruby-deb-version?color=orange&logo=github&logoColor=white)](https://github.com/captn3m0/ruby-deb-version/issues?q=is%3Aissue+is%3Aopen)
+[![License MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/captn3m0/ruby-deb-version/blob/main/LICENSE.txt) [![Rubygems version](https://badgen.net/rubygems/v/deb_version)](https://rubygems.org/gems/deb_version) [![CI Status](https://badgen.net/github/checks/captn3m0/ruby-deb-version)](https://github.com/captn3m0/ruby-deb-version/actions/workflows/main.yml?query=branch%3Amain) ![Latest Tag](https://badgen.net/github/tag/captn3m0/ruby-deb-version) [![GitHub issues](https://img.shields.io/github/issues-raw/captn3m0/ruby-deb-version?color=orange&logo=github&logoColor=white)](https://github.com/captn3m0/ruby-deb-version/issues?q=is%3Aissue+is%3Aopen) ![Gem Total Downloads](https://img.shields.io/gem/dt/deb_version) ![Gem download rank](https://img.shields.io/gem/rt/deb_version) ![GitHub Sponsors](https://img.shields.io/github/sponsors/captn3m0) ![Repology - Repositories](https://img.shields.io/repology/repositories/ruby%3Adeb-version) ![Debian package](https://img.shields.io/debian/v/ruby-deb-version)
 
 A port of "Debian Version" comparison function to Ruby. This is based on 
 [Debian Policy Manual v4.6.20, Section 5.6.12](https://www.debian.org/doc/debian-policy/ch-controlfields.html#version).
@@ -11,9 +11,7 @@ It adapts some of the code and tests from various other ports:
 - https://github.com/xolox/python-deb-pkg-tools
 - https://github.com/knqyf263/go-deb-version/
 
-*Note*: This package is _considered done_, but still maintained. There are no
-dependencies, so new releases only include new ruby versions, and possibly
-drop older ones, or in the unlikely event of Debian Policy Manual changing.
+*Note*: This package is _considered done_, but still maintained.
 
 ## Installation
 
