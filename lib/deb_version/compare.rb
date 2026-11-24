@@ -9,20 +9,34 @@ class DebVersion
   include Comparable
 
   def initialize(version)
-    @version = version
+    @version = version.to_s
     @epoch = 0
     @debian_revision = ""
 
+    parse
+  end
+
+  # Validate and split the version, with dpkg-style errors
+  def parse
+    raise Error, "version string is empty" if @version.empty?
+    raise Error, "version string has embedded spaces" if @version.match?(/\s/)
+
     if @version.include? ":"
-      @epoch, @version = @version.split(":")
-      @epoch = @epoch.to_i
+      epoch, @version = @version.split(":", 2)
+      raise Error, "epoch in version is empty" if epoch.empty?
+      raise Error, "epoch in version is not number" unless epoch.match?(/\A\d+\z/)
+      raise Error, "epoch in version is too big" if epoch.to_i > 2_147_483_647
+      raise Error, "nothing after colon in version number" if @version.empty?
+
+      @epoch = epoch.to_i
     end
 
-    if @version.include? "-"
-      @upstream_version, _, @debian_revision = @version.rpartition("-")
-    else
-      @upstream_version = @version
-    end
+    @upstream_version, _, @debian_revision = @version.rpartition("-") if @version.include? "-"
+    @upstream_version ||= @version
+    raise Error, "revision string is empty" if @version.end_with?("-")
+    raise Error, "version number does not start with digit" unless @upstream_version.match?(/\A\d/)
+    raise Error, "invalid character in version number" unless @upstream_version.match?(/\A[A-Za-z0-9.+~:-]+\z/)
+    raise Error, "invalid character in revision number" unless @debian_revision.match?(/\A[A-Za-z0-9.+~]*\z/)
   end
 
   # Convert to an array of [epoch, upstream_version, debian_revision]
@@ -56,7 +70,6 @@ class DebVersion
   # Compare strings as per https://www.debian.org/doc/debian-policy/ch-controlfields.html#version
   # Section 5.6.12
   # This is used to compare upstream_version as well as debian_revision
-  # rubocop:disable Metrics/PerceivedComplexity, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/AbcSize
   def compare_strings(version1, version2)
     v1 = version1.chars
     v2 = version2.chars
@@ -88,7 +101,6 @@ class DebVersion
     end
     0
   end
-  # rubocop:enable Metrics/PerceivedComplexity, Metrics/MethodLength, Metrics/CyclomaticComplexity, Metrics/AbcSize
 
   # Compare two versions
   # using all 3 parts

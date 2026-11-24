@@ -30,6 +30,7 @@ require 'deb_version'
 v1 = DebVersion.new("1.3~rc2")
 v2 = DebVersion.new("1.3")
 v1 < v2 # true
+DebVersion.new("1 2") # raises DebVersion::Error: version string has embedded spaces
 ```
 
 ## Development

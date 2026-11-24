@@ -25,6 +25,31 @@ class DebVersionTest < Minitest::Test
     assert_equal to_a("17-2-3"), [0, "17-2", "3"]
   end
 
+  # Cases from the issue, go-debian and python-debian test suites
+  INVALID_VERSIONS = [
+    "", "  ", "\t", " 1.0", "1.0\n", "1 2", "0:0 0-1", "1:", "0:", "1-",
+    "a:1", ":1", "a:0-0", "A:0-0", "-:0", "-1x:0", "-1:0-1", "-2147483649:1",
+    "2147483648:1", "2147483649:0-1", "9223372036854775808:0", "a1:1.8.8-070403-1~priv1",
+    "a1", "0:abc3-0", "0:0-0:0",
+    *"!#@$%&/|\\<>()[]{};,_=*^'".chars.map { |c| "0:0#{c}-0" },
+    *"!#@$%&/|\\<>()[]{}:;,_=*^'".chars.map { |c| "0:0-#{c}" }
+  ].freeze
+
+  def test_invalid_versions
+    INVALID_VERSIONS.each { |s| assert_raises(DebVersion::Error, s.inspect) { v_(s) } }
+  end
+
+  def test_max_epoch
+    assert_equal 2_147_483_647, v_("2147483647:0-1").epoch
+  end
+
+  def test_valid_special_characters
+    assert_equal [0, "0:0", "0"], to_a("0:0:0-0")
+    assert_equal [0, "0:0-0:0", "0"], to_a("0:0:0-0:0-0")
+    assert_equal [0, "09azAZ.-+~:", "0"], to_a("0:09azAZ.-+~:-0")
+    assert_equal [0, "0", "azAZ09.+~"], to_a("0:0-azAZ09.+~")
+  end
+
   def test_parse_lots_of_versions
     VERSIONS_FIXTURE.each do |version|
       v_(version)
